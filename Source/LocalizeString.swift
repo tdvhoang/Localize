@@ -82,4 +82,15 @@ public extension String {
     func pluralize(value: Int, tableName: String? = nil) -> String {
         return Pluralize.pluralize(key: self, value: value, tableName: tableName)
     }
+    
+    /// Pluralize strings with numeric values
+    /// get localized and pluralized key acording with the rules
+    /// and values.
+    ///
+    /// - parameter String: The value could you pluralize
+    ///
+    /// - returns: Localized and Pluralized key according with the value.
+    func pluralize(values: [Int], tableName: String? = nil) -> String {
+        return Pluralize.pluralize(key: self, values: values, tableName: tableName)
+    }
 }

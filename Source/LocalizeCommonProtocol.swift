@@ -134,13 +134,21 @@ open class LocalizeCommonProtocol: LocalizeProtocol {
     ///
     /// - returns: localized key or same text
     open func localize(
-      key: String,
-      values replace: [Any],
-      tableName: String? = nil) -> String {
-      
-      let string = localize(key: key, tableName: tableName)
-      let stringFormat = string.replacingOccurrences(of: "%", with: "%@")
-      return String(format: stringFormat, arguments: replace.map { "\($0)" })
+        key: String,
+        values replace: [Any],
+        tableName: String? = nil) -> String {
+
+        var string = localize(key: key, tableName: tableName)
+        var textComponents = string.components(separatedBy: "%")
+        string = ""
+
+        for (index, number) in replace.enumerated() where index < textComponents.count {
+            let aTextPart = textComponents.remove(at: 0)
+            string = "\(string)\(aTextPart)\(number)"
+        }
+
+        string += textComponents.joined(separator: "")
+        return string
     }
 
 
