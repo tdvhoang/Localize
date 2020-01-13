@@ -62,7 +62,7 @@ fileprivate extension JSON {
     }
 }
 
-class LocalizeMultiJson: LocalizeJson {
+public class LocalizeMultiJson: LocalizeCommonProtocol {
     
     public static let `default` = LocalizeMultiJson()
     
@@ -91,7 +91,7 @@ class LocalizeMultiJson: LocalizeJson {
     /// Show all aviable languages with criteria name
     ///
     /// - returns: list with storaged languages code
-    override var availableLanguages: [String] {
+    override public var availableLanguages: [String] {
         var languages: Set<String> = []
         
         for localeId in NSLocale.availableLocaleIdentifiers {
@@ -164,7 +164,7 @@ class LocalizeMultiJson: LocalizeJson {
     /// That prevent replace untagged values
     ///
     /// - returns: localized key or same text
-    override func localize(key: String, tableName: String? = nil) -> String {
+    override public func localize(key: String, tableName: String? = nil) -> String {
         guard let json = readJSON(tableName: tableName) else {
             return key
         }
